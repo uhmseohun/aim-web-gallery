@@ -6,21 +6,17 @@ export default {
   components: {
     ProductCard,
   },
+  async created() {
+    const products = (await this.$db
+      .collection('products')
+      .get())
+      .docs
+      .map((doc) => doc.data());
+    this.products = products;
+  },
   data() {
-    const manyProducts = [];
-    for (let i = 0; i < 20; i += 1) {
-      manyProducts.push({
-        _id: '',
-        image: '',
-        title: '작품 제목',
-        author: {
-          name: '작가 이름',
-          image: '',
-        },
-      });
-    }
     return {
-      products: manyProducts,
+      products: [],
     };
   },
 };

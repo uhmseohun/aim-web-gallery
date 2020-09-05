@@ -1,6 +1,7 @@
 <script>
 import AButton from '@/components/AButton.vue';
 import ProfileImage from '@/components/ProfileImage.vue';
+import Logo from '@/assets/logo.png';
 
 export default {
   name: 'NavBar',
@@ -8,13 +9,18 @@ export default {
     AButton,
     ProfileImage,
   },
+  data() {
+    return {
+      Logo,
+    };
+  },
 };
 </script>
 
 <template>
   <nav class="navbar">
     <div class="navbar__left">
-      <span>AIM LOGO</span>
+      <img class="navbar__left__logo" :src="Logo">
     </div>
 
     <div class="navbar__center">
@@ -43,7 +49,11 @@ export default {
   padding: 0 4rem;
   color: white;
 
-  &__left {}
+  &__left {
+    &__logo {
+      height: 1.5em;
+    }
+  }
 
   &__center {
     margin-left: auto;

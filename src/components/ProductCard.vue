@@ -1,12 +1,12 @@
 <script>
+import Like from '@/assets/like.png';
+import Liked from '@/assets/liked.png';
+import Menu from '@/assets/menu.png';
+
 export default {
   name: 'ProductCard',
   props: {
     product: {
-      _id: {
-        type: String,
-        required: true,
-      },
       image: {
         type: String,
         required: true,
@@ -25,14 +25,42 @@ export default {
           required: true,
         },
       },
+      liked: {
+        type: Boolean,
+        required: true,
+      },
     },
+  },
+  async created() {
+    const storageURL = this.product.image;
+    const imageURL = await this.$storage
+      .refFromURL(storageURL)
+      .getDownloadURL();
+    this.product.image = imageURL;
+  },
+  methods: {
+    imageStyle(imageURL) {
+      return {
+        'background-image': `url('${imageURL}')`,
+      };
+    },
+  },
+  data() {
+    return {
+      Like,
+      Liked,
+      Menu,
+    };
   },
 };
 </script>
 
 <template>
   <div class="card">
-    <div class="card__image" />
+    <div
+      class="card__image"
+      :style="imageStyle(product.image)"
+    />
     <div class="card__info">
       <span class="card__info__title">{{ product.title }}</span>
       <div class="card__info__meta">
@@ -44,10 +72,16 @@ export default {
         </div>
         <div class="card__info__meta__menu">
           <span class="card__info__meta__menu__item">
-            ❤️
+            <img
+              class="card__info__meta__menu__item__image"
+              :src="product.liked ? Like : Liked"
+            />
           </span>
           <span class="card__info__meta__menu__item">
-            ㆔
+            <img
+              class="card__info__meta__menu__item__image"
+              :src="Menu"
+            />
           </span>
         </div>
       </div>
@@ -95,6 +129,16 @@ export default {
       &__menu {
         margin-left: auto;
         display: flex;
+
+        &__item {
+          &__image {
+            height: 1em;
+
+            &:first-of-type {
+              margin-right: 4px;
+            }
+          }
+        }
       }
     }
   }
