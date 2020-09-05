@@ -1,0 +1,74 @@
+<script>
+import AButton from '@/components/AButton.vue';
+import ProfileImage from '@/components/ProfileImage.vue';
+
+export default {
+  name: 'NavBar',
+  components: {
+    AButton,
+    ProfileImage,
+  },
+};
+</script>
+
+<template>
+  <nav class="navbar">
+    <div class="navbar__left">
+      <span>AIM LOGO</span>
+    </div>
+
+    <div class="navbar__center">
+      <span class="navbar__center__item">피드</span>
+      <span class="navbar__center__item">갤러리</span>
+      <span class="navbar__center__item">저장된 작품</span>
+    </div>
+
+    <div class="navbar__right">
+      <a-button class="navbar__right__button">작품 업로드</a-button>
+      <profile-image
+        class="navbar__right__profile"
+        image="null"
+      />
+    </div>
+  </nav>
+</template>
+
+<style lang="scss" scoped>
+.navbar {
+  background-color: rgb(17, 17, 17);
+  box-sizing: border-box;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 0 4rem;
+  color: white;
+
+  &__left {}
+
+  &__center {
+    margin-left: auto;
+    margin-right: auto;
+
+    &__item {
+      &:not(:first-of-type) {
+        margin-left: 15px;
+        padding-left: 15px;
+        border-left: 1px solid rgb(255, 255, 255);
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+
+    &__button,
+    &__profile {
+      height: 2rem;
+    }
+
+    &__profile {
+      margin-left: 10px;
+    }
+  }
+}
+</style>
