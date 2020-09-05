@@ -98,6 +98,8 @@ export default {
     height: 200px;
     border: solid 1px rgb(209, 209, 209);
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   &__info {
