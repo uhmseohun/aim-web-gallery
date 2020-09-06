@@ -1,19 +1,30 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
+import Loader from 'vue-loading-overlay';
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    Loader,
+  },
+  data() {
+    return {
+      pending: false,
+    };
   },
 };
 </script>
 
 <template>
   <div id="app">
+    <loader :active.sync="pending" />
     <nav-bar />
     <div id="container">
-      <router-view/>
+      <router-view
+        @startLoad="pending = true"
+        @finishLoad="pending = false"
+      />
     </div>
   </div>
 </template>

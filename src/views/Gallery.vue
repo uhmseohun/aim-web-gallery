@@ -1,22 +1,18 @@
 <script>
 import ProductCard from '@/components/ProductCard.vue';
-import Loader from 'vue-loading-overlay';
 
 export default {
   name: 'Gallery',
-  components: {
-    ProductCard,
-    Loader,
-  },
+  components: { ProductCard },
   async created() {
-    this.pending = true;
+    this.$emit('startLoad');
     const products = (await this.$db
       .collection('products')
       .get())
       .docs
       .map((doc) => doc.data());
     this.products = products;
-    this.pending = false;
+    this.$emit('finishLoad');
   },
   data() {
     return {

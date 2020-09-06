@@ -1,27 +1,22 @@
 <script>
 import ProductCard from '@/components/ProductCard.vue';
-import Loader from 'vue-loading-overlay';
 
 export default {
   name: 'Featured',
-  components: {
-    ProductCard,
-    Loader,
-  },
+  components: { ProductCard },
   async created() {
-    this.pending = true;
+    this.$emit('startLoad');
     const products = (await this.$db
       .collection('products')
       .get())
       .docs
       .map((doc) => doc.data());
     this.products = products;
-    this.pending = false;
+    this.$emit('finishLoad');
   },
   data() {
     return {
       products: [],
-      pending: false,
     };
   },
 };
@@ -31,13 +26,12 @@ export default {
   <div class="home">
     <h1>FOR YOU</h1>
     <div class="card-container">
-      <loader :active.sync="pending" />
-        <product-card
-          class="card"
-          :key="product._id"
-          v-for="product in products"
-          :product="product"
-        />
+      <product-card
+        class="card"
+        :key="product._id"
+        v-for="product in products"
+        :product="product"
+      />
     </div>
   </div>
 </template>
