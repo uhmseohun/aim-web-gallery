@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Featured from '../views/Featured.vue';
+import Feed from '../views/Feed.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/featured',
-    name: 'Featured',
-    component: Featured,
+    path: '/feed',
+    name: 'Feed',
+    component: Feed,
   },
 ];
 
