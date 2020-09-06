@@ -14,6 +14,11 @@ export default {
       Logo,
     };
   },
+  methods: {
+    pushTo(routeName) {
+      this.$router.push({ name: routeName });
+    },
+  },
 };
 </script>
 
@@ -24,9 +29,26 @@ export default {
     </div>
 
     <div class="navbar__center">
-      <span class="navbar__center__item">피드</span>
-      <span class="navbar__center__item">갤러리</span>
-      <span class="navbar__center__item">저장된 작품</span>
+      <span
+        class="navbar__center__item"
+        @click="pushTo('Feed')"
+      >
+        피드
+      </span>
+
+      <span
+        class="navbar__center__item"
+        @click="pushTo('Gallery')"
+      >
+        갤러리
+      </span>
+
+      <span
+        class="navbar__center__item"
+        @click="pushTo('Saved')"
+      >
+        저장된 작품
+      </span>
     </div>
 
     <div class="navbar__right">
@@ -60,6 +82,8 @@ export default {
     margin-right: auto;
 
     &__item {
+      cursor: pointer;
+
       &:not(:first-of-type) {
         margin-left: 15px;
         padding-left: 15px;
