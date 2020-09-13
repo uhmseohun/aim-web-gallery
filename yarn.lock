@@ -9466,6 +9466,16 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@9.x:
+  version "9.17.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.17.2.tgz#7f33ce157a64c303d2ca98863c9a3f437e5f1187"
+  integrity sha512-HkpPZVMYsnhFUBLdy/LvkU9snggKP3VAuSVnPhVXjxdg02lWbFx0W8H3m7A+WMWw2diXZS1wIa4m67XkNxdvew==
+
+sweetalert2@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.0.2.tgz#dd2ae80102b992c7acd683a68c5b875209ee77d0"
+  integrity sha512-norIgpVW16EAD+wgAnw86PTQn4WgBTXwSJUOUrWP0cd+gVjQKxYXyMNJWAcb1bBAMr9dL2dyS4LztbyErRZ/BA==
+
 symbol-observable@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
@@ -10093,6 +10103,13 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-sweetalert2@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/vue-sweetalert2/-/vue-sweetalert2-3.0.8.tgz#ed498d1f4945884506dae029434893b374e46585"
+  integrity sha512-5Nti/g9znA9otC7IO9YIrJMZrlRq3BkfjjTK6e2p54PyK7RumvvFr4iQ1GdCjz0QTupRbblEQABN3vf+KQRWSQ==
+  dependencies:
+    sweetalert2 "9.x"
 
 vue-template-compiler@^2.6.11:
   version "2.6.12"

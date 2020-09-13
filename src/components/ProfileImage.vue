@@ -7,16 +7,25 @@ export default {
       required: true,
     },
   },
+  computed: {
+    signState() {
+      return this.$store.state.signedIn
+        ? 'SIGN_IN' : 'SIGN_OUT';
+    },
+  },
 };
 </script>
 
 <template>
-  <div
+  <!-- <div
     class="image"
     :style="{
       'background-image': image
     }"
-  />
+  /> -->
+  <span>
+    STATE: {{ signState }}
+  </span>
 </template>
 
 <style lang="scss" scoped>

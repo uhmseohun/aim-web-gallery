@@ -10,11 +10,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    color: {
+      type: String,
+      default: '#2C4DB4',
+    },
   },
   methods: {
     emitClick() {
       if (this.disabled || this.pending) return;
       this.$emit('click');
+    },
+  },
+  computed: {
+    buttonColor() {
+      return {
+        'background-color': this.color,
+      };
     },
   },
 };
@@ -25,6 +36,7 @@ export default {
     v-if="disabled"
     class="button button-disabled"
     @click="emitClick"
+    :style="buttonColor"
   >
     <slot />
   </button>
@@ -33,6 +45,7 @@ export default {
     v-else-if="pending"
     class="button button-pending"
     @click="emitClick"
+    :style="buttonColor"
   >
     <slot />
   </button>
@@ -41,6 +54,7 @@ export default {
     v-else
     class="button"
     @click="emitClick"
+    :style="buttonColor"
   >
     <slot />
   </button>
@@ -51,7 +65,6 @@ export default {
   display: inline-block;
   border: 0;
   border-radius: 30px;
-  background-color: rgb(34, 76, 187);
   color: white;
   transition: 0.5s background-color ease;
   padding: 0.5rem 1rem;

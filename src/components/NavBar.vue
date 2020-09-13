@@ -53,6 +53,7 @@ export default {
 
     <div class="navbar__right">
       <a-button class="navbar__right__button">작품 업로드</a-button>
+      <a-button @click="pushTo('SignIn')">로그인</a-button>
       <profile-image
         class="navbar__right__profile"
         image="null"

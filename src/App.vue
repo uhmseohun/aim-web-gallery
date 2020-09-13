@@ -13,14 +13,30 @@ export default {
       pending: false,
     };
   },
+  computed: {
+    showNavBar() {
+      return this.$route.fullPath !== '/sign-in';
+    },
+    containerStyle() {
+      return {
+        width: '100%',
+        height: '100%',
+        padding: this.showNavBar
+          ? '20px 60px' : {},
+      };
+    },
+  },
 };
 </script>
 
 <template>
   <div id="app">
     <loader :active.sync="pending" />
-    <nav-bar />
-    <div id="container">
+    <nav-bar v-show="showNavBar" />
+    <div
+      id="container"
+      :style="containerStyle"
+    >
       <router-view
         @startLoad="pending = true"
         @finishLoad="pending = false"
@@ -40,7 +56,6 @@ export default {
 #container {
   width: 100%;
   height: 100%;
-  padding: 20px 60px;
 }
 </style>
 
