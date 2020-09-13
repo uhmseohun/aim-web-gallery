@@ -11,6 +11,7 @@ export default {
       .get())
       .docs
       .map((doc) => doc.data());
+    console.log(products);
     this.products = products;
     this.$emit('finishLoad');
   },
@@ -26,7 +27,6 @@ export default {
   <div class="home">
     <h1>신규 작품</h1>
     <div class="card-container">
-      <loader :active.sync="pending" />
         <product-card
           class="card"
           :key="product._id"

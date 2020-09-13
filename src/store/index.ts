@@ -1,6 +1,7 @@
 import router from '@/router';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import auth from '../firebase/auth';
 import db from '../firebase/db';
 
@@ -36,4 +37,5 @@ export default new Vuex.Store({
   },
   modules: {
   },
+  plugins: [createPersistedState()],
 });
