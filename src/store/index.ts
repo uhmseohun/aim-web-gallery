@@ -29,13 +29,11 @@ export default new Vuex.Store({
       router.push({ name: 'Feed' });
     },
     async fetchUserProfile({ commit }, user) {
-      console.log(user);
       const userProfile = (await db
         .collection('user')
         .doc(user.uid)
         .get())
         .data();
-      console.log(userProfile);
       commit('setUserProfile', userProfile);
     },
     async signUpAccount(_, account) {

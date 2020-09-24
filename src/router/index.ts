@@ -4,7 +4,7 @@ import Feed from '../views/Feed.vue';
 import Gallery from '../views/Gallery.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
-import auth from '../firebase/auth';
+import Profile from '../views/Profile.vue';
 
 Vue.use(VueRouter);
 
@@ -41,6 +41,14 @@ const routes: Array<RouteConfig> = [
       requiresAuth: false,
     },
   },
+  {
+    path: '/profile/:userId',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -49,14 +57,14 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some((v) => v.meta.requiresAuth);
+// router.beforeEach((to, from, next) => {
+//   const requiresAuth = to.matched.some((v) => v.meta.requiresAuth);
 
-  if (requiresAuth && !auth.currentUser) {
-    next({ name: 'sign-up' });
-  } else {
-    next();
-  }
-});
+//   if (requiresAuth) {
+//     next({ name: 'sign-in' });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
