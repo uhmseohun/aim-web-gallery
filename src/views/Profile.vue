@@ -1,6 +1,9 @@
 <script>
+import ProfileImage from '@/components/ProfileImage.vue';
+
 export default {
   name: 'Profile',
+  components: { ProfileImage },
   async created() {
     this.$emit('startLoad');
     const { userId } = this.$route.params;
@@ -21,20 +24,32 @@ export default {
 </script>
 
 <template>
-  <div class="home">
-    {{ profile }}
+  <div class="profile">
+    <div class="background" />
+    <profile-image />
+    <h1>{{ profile.name }}</h1>
+    <p>한줄소개</p>
+    <p>
+      <span style="color: #0F4BC2; font-weight: bold;">팔로워</span>
+      100
+      <span style="color: #0F4BC2; font-weight: bold;">팔로잉</span>
+      100
+    </p>
+    <div style="width: 100vw; height: 1px; background-color: #666461;" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.card {
-  margin-top: 10px;
-  margin-right: 30px;
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card-container {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
+.background {
+  width: 100vw;
+  height: 250px;
+  background-image: url('https://ssl.pstatic.net/tveta/libs/1296/1296980/43ba3c66bd27541be66c_20200923151045360.jpg');
+  background-size: cover;
 }
 </style>
