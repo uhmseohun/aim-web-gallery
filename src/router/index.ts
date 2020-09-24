@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import Feed from '../views/Feed.vue';
 import Gallery from '../views/Gallery.vue';
 import SignIn from '../views/SignIn.vue';
+import SignUp from '../views/SignUp.vue';
 import auth from '../firebase/auth';
 
 Vue.use(VueRouter);
@@ -28,6 +29,14 @@ const routes: Array<RouteConfig> = [
     path: '/sign-in',
     name: 'SignIn',
     component: SignIn,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/sign-up',
+    name: 'Signup',
+    component: SignUp,
     meta: {
       requiresAuth: false,
     },

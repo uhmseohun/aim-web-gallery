@@ -11,7 +11,6 @@ export default {
       .get())
       .docs
       .map((doc) => doc.data());
-    console.log(products);
     this.products = products;
     this.$emit('finishLoad');
   },

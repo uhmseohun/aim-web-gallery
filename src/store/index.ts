@@ -19,7 +19,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async signIn({ dispatch }, account) {
+    async signInWithAccount({ dispatch }, account) {
       const { user } = await auth.signInWithEmailAndPassword(
         account.email,
         account.password,
@@ -33,6 +33,20 @@ export default new Vuex.Store({
         .doc(user.uid)
         .get();
       commit('setUserProfile', userProfile.data());
+    },
+    async signUpAccount({ commit }, account) {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        account.email,
+        account.password,
+      );
+      const userProfile = await db
+        .collection('user')
+        .doc(user?.uid)
+        .set({
+          email: account.email,
+          name: account.name,
+        });
+      commit('setUserProfile', userProfile);
     },
   },
   modules: {

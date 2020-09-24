@@ -17,7 +17,7 @@ export default {
   methods: {
     async signInWithAccount() {
       try {
-        await this.$store.dispatch('signIn', this.account);
+        await this.$store.dispatch('signInWithAccount', this.account);
       } catch (error) {
         await this.$swal('에러!', '이메일이나 비밀번호를 확인해 주세요.', 'error');
       }
