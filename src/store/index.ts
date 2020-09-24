@@ -16,6 +16,7 @@ export default new Vuex.Store({
     setUserProfile(state, userProfile) {
       state.userProfile = userProfile;
       state.signedIn = true;
+      return state;
     },
   },
   actions: {
@@ -28,25 +29,27 @@ export default new Vuex.Store({
       router.push({ name: 'Feed' });
     },
     async fetchUserProfile({ commit }, user) {
-      const userProfile = await db
+      console.log(user);
+      const userProfile = (await db
         .collection('user')
         .doc(user.uid)
-        .get();
-      commit('setUserProfile', userProfile.data());
+        .get())
+        .data();
+      console.log(userProfile);
+      commit('setUserProfile', userProfile);
     },
-    async signUpAccount({ commit }, account) {
+    async signUpAccount(_, account) {
       const { user } = await auth.createUserWithEmailAndPassword(
         account.email,
         account.password,
       );
-      const userProfile = await db
+      await db
         .collection('user')
         .doc(user?.uid)
         .set({
           email: account.email,
           name: account.name,
         });
-      commit('setUserProfile', userProfile);
     },
   },
   modules: {

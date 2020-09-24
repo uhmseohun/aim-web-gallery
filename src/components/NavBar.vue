@@ -2,6 +2,7 @@
 import AButton from '@/components/AButton.vue';
 import ProfileImage from '@/components/ProfileImage.vue';
 import Logo from '@/assets/logo.png';
+import { mapState } from 'vuex';
 
 export default {
   name: 'NavBar',
@@ -18,6 +19,9 @@ export default {
     pushTo(routeName) {
       this.$router.push({ name: routeName });
     },
+  },
+  computed: {
+    ...mapState(['signedIn']),
   },
 };
 </script>
@@ -53,8 +57,14 @@ export default {
 
     <div class="navbar__right">
       <a-button class="navbar__right__button">작품 업로드</a-button>
-      <a-button @click="pushTo('SignIn')">로그인</a-button>
+      <a-button
+        v-if="!signedIn"
+        @click="pushTo('SignIn')"
+      >
+        로그인
+      </a-button>
       <profile-image
+        v-else
         class="navbar__right__profile"
         image="null"
       />
@@ -99,6 +109,7 @@ export default {
     &__button,
     &__profile {
       height: 2rem;
+      margin-right: 5px;
     }
 
     &__profile {

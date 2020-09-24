@@ -7,12 +7,6 @@ export default {
       required: true,
     },
   },
-  computed: {
-    signState() {
-      return this.$store.state.signedIn
-        ? 'SIGN_IN' : 'SIGN_OUT';
-    },
-  },
 };
 </script>
 
@@ -24,7 +18,7 @@ export default {
     }"
   /> -->
   <span>
-    STATE: {{ signState }}
+    {{ $store.state.userProfile.name }}
   </span>
 </template>
 
