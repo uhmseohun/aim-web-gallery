@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     showNavBar() {
-      return this.$route.fullPath !== '/sign-in';
+      return !this.$route.fullPath.startsWith('/sign');
     },
     containerStyle() {
       return {

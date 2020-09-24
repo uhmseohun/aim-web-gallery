@@ -22,6 +22,9 @@ export default {
         await this.$swal('에러!', '이메일이나 비밀번호를 확인해 주세요.', 'error');
       }
     },
+    pushTo(to) {
+      this.$router.push(to);
+    },
   },
 };
 </script>
@@ -30,7 +33,7 @@ export default {
   <div class="container">
     <img class="logo" :src="WhiteLogo">
     <div class="form">
-      <a-button>
+      <a-button @click="pushTo('/sign-up')">
         회원가입
       </a-button>
       <div style="display: flex; align-items: center;">
