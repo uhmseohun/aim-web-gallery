@@ -21,7 +21,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['signedIn']),
+    ...mapState(['signedIn', 'userProfile']),
   },
 };
 </script>
@@ -63,11 +63,12 @@ export default {
       >
         로그인
       </a-button>
-      <profile-image
-        v-else
-        class="navbar__right__profile"
-        image="null"
-      />
+      <div v-else @click="pushTo('EditProfile')">
+        <profile-image
+          class="navbar__right__profile"
+          :image="userProfile.profileImage"
+        />
+      </div>
     </div>
   </nav>
 </template>
@@ -114,6 +115,7 @@ export default {
 
     &__profile {
       margin-left: 10px;
+      cursor: pointer;
     }
   }
 }

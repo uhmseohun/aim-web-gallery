@@ -6,7 +6,7 @@ export default {
   components: { ProfileImage },
   async created() {
     this.$emit('startLoad');
-    const { userId } = this.$route.params;
+    const { userId } = this.$store.state.userProfile;
     const profile = (await this.$db
       .collection('user')
       .doc(userId)
@@ -18,24 +18,44 @@ export default {
   data() {
     return {
       profile: {},
+      coverImageURL: null,
     };
+  },
+  watch: {
+    profile: {
+      deep: true,
+      async handler() {
+        const storageURL = `/cover/${this.profile.coverImage}`;
+        const imageURL = await this.$storage
+          .ref(storageURL)
+          .getDownloadURL();
+        this.coverImageURL = imageURL;
+      },
+    },
+  },
+  computed: {
+    computedCoverStyle() {
+      const coverImageURL = this.coverImageURL
+        ? this.coverImageURL : null;
+      return { 'background-image': `url('${coverImageURL}')` };
+    },
   },
 };
 </script>
 
 <template>
   <div class="profile">
-    <div class="background" />
-    <profile-image />
-    <h1 style="margin-bottom: 0;">{{ profile.name }}</h1>
+    <div
+      class="background"
+      :style="computedCoverStyle"
+    />
+    <profile-image
+      v-if="profile.profileImage"
+      :image="profile.profileImage"
+      class="profile-image"
+    />
+    <h1>{{ profile.name }}</h1>
     <p>{{ profile.introduce }}</p>
-    <p>
-      <span style="color: #0F4BC2; font-weight: bold;">팔로워</span>
-      100
-      <span style="color: #0F4BC2; font-weight: bold;">팔로잉</span>
-      100
-    </p>
-    <div style="width: 100vw; height: 1px; background-color: #666461;" />
   </div>
 </template>
 
@@ -48,8 +68,22 @@ export default {
 
 .background {
   width: 100vw;
-  height: 250px;
-  background-image: url('https://ssl.pstatic.net/tveta/libs/1296/1296980/43ba3c66bd27541be66c_20200923151045360.jpg');
+  height: 260px;
   background-size: cover;
+  margin-top: -20px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+p {
+  margin-top: 5px;
 }
 </style>

@@ -1,5 +1,6 @@
 <script>
 import ProfileImage from '@/components/ProfileImage.vue';
+import { v4 as uuid } from 'uuid';
 
 export default {
   name: 'EditProfile',
@@ -18,7 +19,20 @@ export default {
   data() {
     return {
       profile: {},
+      coverImageURL: null,
     };
+  },
+  watch: {
+    profile: {
+      deep: true,
+      async handler() {
+        const storageURL = `/cover/${this.profile.coverImage}`;
+        const imageURL = await this.$storage
+          .ref(storageURL)
+          .getDownloadURL();
+        this.coverImageURL = imageURL;
+      },
+    },
   },
   methods: {
     async saveProfile() {
@@ -40,14 +54,50 @@ export default {
         'success',
       );
     },
+    async getProfileImage() {
+      const fileInput = this.$refs.profileImage;
+      await fileInput.click();
+    },
+    async getCoverImage() {
+      const fileInput = this.$refs.coverImage;
+      await fileInput.click();
+    },
+    async uploadProfileImage() {
+      const fileId = uuid();
+      const file = this.$refs.profileImage.files[0];
+      await this.$storage.ref(`/profile/${fileId}`).put(file);
+      this.profile.profileImage = fileId;
+      await this.saveProfile();
+    },
+    async uploadCoverImage() {
+      const fileId = uuid();
+      const file = this.$refs.coverImage.files[0];
+      await this.$storage.ref(`/cover/${fileId}`).put(file);
+      this.profile.coverImage = fileId;
+      await this.saveProfile();
+    },
+  },
+  computed: {
+    computedCoverStyle() {
+      const coverImageURL = this.coverImageURL
+        ? this.coverImageURL : null;
+      return { 'background-image': `url('${coverImageURL}')` };
+    },
   },
 };
 </script>
 
 <template>
   <div class="profile">
-    <div class="background" />
-    <profile-image />
+    <div
+      class="background"
+      :style="computedCoverStyle"
+    />
+    <profile-image
+      v-if="profile.profileImage"
+      :image="profile.profileImage"
+      class="profile-image"
+    />
     <h1>{{ profile.name }}</h1>
     <div class="form">
       <div class="form__field">
@@ -61,9 +111,19 @@ export default {
       </div>
 
       <div class="form__field">
+        <span class="form__label">이메일</span>
+        <input
+          v-model="profile.email"
+          class="form__input"
+          style="width: 100%"
+          disabled
+        />
+      </div>
+
+      <div class="form__field">
         <span class="form__label">닉네임</span>
         <input
-          v-model="profile.name"
+          v-model="profile.nickname"
           class="form__input"
           placeholder="닉네임을 작성해 주세요."
           style="width: 100%"
@@ -82,10 +142,30 @@ export default {
 
       <div class="form__field">
         <span class="form__label">한줄소개</span>
-        <input
+        <textarea
           v-model="profile.introduce"
           class="form__input"
           placeholder="한줄소개를 작성해 주세요."
+          style="width: 100%; resize: none;"
+        />
+      </div>
+
+      <div class="form__field">
+        <span class="form__label">Insta</span>
+        <input
+          v-model="profile.instagram"
+          class="form__input"
+          placeholder="인스타그램 URL을 작성해 주세요. (선택)"
+          style="width: 100%"
+        />
+      </div>
+
+      <div class="form__field">
+        <span class="form__label">FB</span>
+        <input
+          v-model="profile.facebook"
+          class="form__input"
+          placeholder="페이스북 URL을 작성해 주세요. (선택)"
           style="width: 100%"
         />
       </div>
@@ -99,13 +179,13 @@ export default {
           style="width: 100%"
         />
       </div>
-
-      <button
-        @click="saveProfile"
-        class="form__button"
-      >
-        저장하기
-      </button>
+    </div>
+    <input type="file" style="display: none;" ref="profileImage" @change="uploadProfileImage">
+    <input type="file" style="display: none;" ref="coverImage" @change="uploadCoverImage">
+    <div style="display: flex;" id="menu-wrapper">
+      <button class="save" @click="saveProfile">저장</button>
+      <button class="save" @click="getProfileImage">프로필 사진 수정</button>
+      <button class="save" @click="getCoverImage">커버 사진 수정</button>
     </div>
   </div>
 </template>
@@ -119,28 +199,78 @@ export default {
 
 .background {
   width: 100vw;
-  height: 250px;
-  background-image: url('https://ssl.pstatic.net/tveta/libs/1296/1296980/43ba3c66bd27541be66c_20200923151045360.jpg');
+  height: 260px;
   background-size: cover;
+  margin-top: -20px;
 }
 
 .form {
-  width: 450px;
+  width: 800px;
   border-radius: 15px;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
   background-color: #FFFFFF;
-  margin-top: 30px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 15px;
 
   &__button {
     margin-bottom: 10px;
   }
 
+  &__field {
+    display: flex;
+  }
+
+  &__label {
+    background-color: #0F4BC2;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 10px;
+    padding: 1px 8px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
+
   &__input {
-    border: 1px solid #7F7F7F;
     padding: 10px;
     margin-bottom: 9px;
+    background-color: #EBEBEB;
+    border-radius: 15px;
+    border: 0;
+    outline: none;
+    padding: 5px 20px;
   }
+}
+
+.save {
+  width: 150px;
+  height: 40px;
+  background-color: #0F4BC2;
+  color: white;
+  border: 0;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  outline: none;
+  cursor: pointer;
+}
+
+#menu-wrapper button {
+  margin: 0 10px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+}
+
+h1 {
+  margin: 10px 0;
 }
 </style>
