@@ -27,8 +27,8 @@ export default {
   <div class="profile">
     <div class="background" />
     <profile-image />
-    <h1>{{ profile.name }}</h1>
-    <p>한줄소개</p>
+    <h1 style="margin-bottom: 0;">{{ profile.name }}</h1>
+    <p>{{ profile.introduce }}</p>
     <p>
       <span style="color: #0F4BC2; font-weight: bold;">팔로워</span>
       100

@@ -1,10 +1,22 @@
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ProfileImage',
   props: {
     image: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    ...mapState(['userProfile']),
+  },
+  methods: {
+    pushToProfile() {
+      this.$router.push(
+        `/profile/${this.userProfile.userId}`,
+      );
     },
   },
 };
@@ -17,7 +29,7 @@ export default {
       'background-image': image
     }"
   /> -->
-  <span>
+  <span @click="pushToProfile">
     {{ $store.state.userProfile.name }}
   </span>
 </template>
