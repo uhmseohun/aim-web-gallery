@@ -5,6 +5,7 @@ import Gallery from '../views/Gallery.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
+import EditProfile from '../views/EditProfile.vue';
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,14 @@ const routes: Array<RouteConfig> = [
     path: '/profile/:userId',
     name: 'Profile',
     component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/edit-profile',
+    name: 'EditProfile',
+    component: EditProfile,
     meta: {
       requiresAuth: true,
     },

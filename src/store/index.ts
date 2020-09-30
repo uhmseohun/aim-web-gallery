@@ -34,7 +34,10 @@ export default new Vuex.Store({
         .doc(user.uid)
         .get())
         .data();
-      commit('setUserProfile', userProfile);
+      commit('setUserProfile', {
+        ...userProfile,
+        userId: user.uid,
+      });
     },
     async signUpAccount(_, account) {
       const { user } = await auth.createUserWithEmailAndPassword(
@@ -47,6 +50,10 @@ export default new Vuex.Store({
         .set({
           email: account.email,
           name: account.name,
+          nickname: null,
+          phone: null,
+          introduce: null,
+          category: null,
         });
     },
   },
