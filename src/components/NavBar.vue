@@ -21,7 +21,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['signedIn', 'userProfile']),
+    ...mapState(['signedIn']),
   },
 };
 </script>

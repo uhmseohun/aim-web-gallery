@@ -14,9 +14,7 @@ export default {
   },
   methods: {
     pushToProfile() {
-      this.$router.push(
-        `/profile/${this.userProfile.userId}`,
-      );
+      this.$router.push('/edit-profile');
     },
   },
 };
