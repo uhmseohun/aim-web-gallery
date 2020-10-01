@@ -6,11 +6,15 @@ export default {
   components: { ProductCard },
   async created() {
     this.$emit('startLoad');
+    const { userLikes } = this.$store.state;
     const products = (await this.$db
       .collection('products')
       .get())
       .docs
-      .map((doc) => doc.data());
+      .map((doc) => ({
+        ...doc.data(),
+        liked: userLikes.includes(doc.id),
+      }));
     this.products = products;
     this.$emit('finishLoad');
   },
@@ -28,7 +32,7 @@ export default {
     <div class="card-container">
       <product-card
         class="card"
-        :key="product._id"
+        :key="product.id"
         v-for="product in products"
         :product="product"
       />

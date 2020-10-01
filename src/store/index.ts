@@ -11,11 +11,16 @@ export default new Vuex.Store({
   state: {
     userProfile: {},
     signedIn: false,
+    userLikes: [],
   },
   mutations: {
     setUserProfile(state, userProfile) {
       state.userProfile = userProfile;
       state.signedIn = true;
+      return state;
+    },
+    setUserLikes(state, userLikes) {
+      state.userLikes = userLikes;
       return state;
     },
   },
@@ -26,6 +31,7 @@ export default new Vuex.Store({
         account.password,
       );
       dispatch('fetchUserProfile', user);
+      dispatch('fetchUserLikes', user);
       router.push({ name: 'Feed' });
     },
     async fetchUserProfile({ commit }, user) {
@@ -38,6 +44,14 @@ export default new Vuex.Store({
         ...userProfile,
         userId: user.uid,
       });
+    },
+    async fetchUserLikes({ commit }, user) {
+      const userLikes = (await db
+        .collection('products')
+        .where('likers', 'array-contains', user.uid)
+        .get()
+      ).docs.map((v) => v.id);
+      commit('setUserLikes', userLikes);
     },
     async signUpAccount(_, account) {
       const { user } = await auth.createUserWithEmailAndPassword(

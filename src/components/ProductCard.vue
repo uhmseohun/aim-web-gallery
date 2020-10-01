@@ -74,7 +74,7 @@ export default {
           <span class="card__info__meta__menu__item">
             <img
               class="card__info__meta__menu__item__image"
-              :src="product.liked ? Like : Liked"
+              :src="product.liked ? Liked : Like"
             />
           </span>
           <span class="card__info__meta__menu__item">
