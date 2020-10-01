@@ -59,6 +59,9 @@ export default {
         .set(product);
       this.$emit('finishLoad');
     },
+    pushToProfile(author) {
+      this.$router.push(`/profile/${author.userId}`);
+    },
   },
   computed: {
     liked() {
@@ -90,7 +93,10 @@ export default {
             class="card__info__meta__author__image"
             :image="product.author.profileImage"
           />
-          <span class="card__info__meta__author__name">
+          <span
+            @click="pushToProfile(product.author)"
+            class="card__info__meta__author__name"
+          >
             {{ product.author.name }}
           </span>
         </div>
@@ -151,7 +157,9 @@ export default {
           margin-right: 5px;
         }
 
-        &__name {}
+        &__name {
+          cursor: pointer;
+        }
       }
 
       &__menu {
