@@ -6,7 +6,6 @@ export default {
   components: { ProductCard },
   async created() {
     this.$emit('startLoad');
-    const { userLikes } = this.$store.state;
     const products = (await this.$db
       .collection('products')
       .get())

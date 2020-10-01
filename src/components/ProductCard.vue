@@ -7,24 +7,8 @@ export default {
   name: 'ProductCard',
   props: {
     product: {
-      image: {
-        type: String,
-        required: true,
-      },
-      title: {
-        type: String,
-        required: true,
-      },
-      author: {
-        image: {
-          type: String,
-          default: '',
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-      },
+      type: Object,
+      required: true,
     },
   },
   async created() {
@@ -39,6 +23,33 @@ export default {
       return {
         'background-image': `url('${imageURL}')`,
       };
+    },
+    async toggleProductLike() {
+      this.$emit('startLoad');
+      const { userLikes } = this.$store.state;
+      const { id: productId } = this.product;
+      const userLiked = this.liked;
+      const { userId } = this.$store.state.userProfile;
+      const product = (await this.$db
+        .collection('products')
+        .doc(productId)
+        .get())
+        .data();
+      if (!userLiked) {
+        userLikes.push(productId);
+        product.likers.push(userId);
+      } else {
+        const index1 = userLikes.indexOf(productId);
+        userLikes.splice(index1, 1);
+        const index2 = product.likers.indexOf(userId);
+        product.likers.splice(index2, 1);
+      }
+      this.$store.commit('setUserLikes', userLikes);
+      await this.$db
+        .collection('products')
+        .doc(productId)
+        .set(product);
+      this.$emit('finishLoad');
     },
   },
   computed: {
@@ -75,6 +86,7 @@ export default {
         <div class="card__info__meta__menu">
           <span class="card__info__meta__menu__item">
             <img
+              @click="toggleProductLike"
               class="card__info__meta__menu__item__image"
               :src="liked ? Liked : Like"
             />
@@ -137,6 +149,7 @@ export default {
         &__item {
           &__image {
             height: 1em;
+            cursor: pointer;
 
             &:first-of-type {
               margin-right: 4px;
