@@ -3,6 +3,7 @@ import Like from '@/assets/like.png';
 import Liked from '@/assets/liked.png';
 import Menu from '@/assets/menu.png';
 import ProfileImage from '@/components/ProfileImage.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'ProductCard',
@@ -34,6 +35,7 @@ export default {
     },
     async toggleProductLike() {
       this.$emit('startLoad');
+      if (!this.signedIn) return;
       const { userLikes } = this.$store.state;
       const { id: productId } = this.product;
       const userLiked = this.liked;
@@ -68,6 +70,7 @@ export default {
       const { userLikes } = this.$store.state;
       return userLikes.includes(this.product.id);
     },
+    ...mapState(['signedIn']),
   },
   data() {
     return {
@@ -100,7 +103,7 @@ export default {
             {{ product.author.name }}
           </span>
         </div>
-        <div class="card__info__meta__menu">
+        <div v-if="signedIn" class="card__info__meta__menu">
           <span class="card__info__meta__menu__item">
             <img
               @click="toggleProductLike"
