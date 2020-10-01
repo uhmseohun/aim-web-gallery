@@ -63,18 +63,22 @@ export default {
       await fileInput.click();
     },
     async uploadProfileImage() {
+      this.$emit('startLoad');
       const fileId = uuid();
       const file = this.$refs.profileImage.files[0];
       await this.$storage.ref(`/profile/${fileId}`).put(file);
       this.profile.profileImage = fileId;
       await this.saveProfile();
+      this.$emit('finishLoad');
     },
     async uploadCoverImage() {
+      this.$emit('startLoad');
       const fileId = uuid();
       const file = this.$refs.coverImage.files[0];
       await this.$storage.ref(`/cover/${fileId}`).put(file);
       this.profile.coverImage = fileId;
       await this.saveProfile();
+      this.$emit('finishLoad');
     },
   },
   computed: {
@@ -200,6 +204,7 @@ export default {
 .background {
   width: 100vw;
   height: 260px;
+  background-position: center;
   background-size: cover;
   margin-top: -20px;
 }
