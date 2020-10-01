@@ -2,9 +2,11 @@
 import Like from '@/assets/like.png';
 import Liked from '@/assets/liked.png';
 import Menu from '@/assets/menu.png';
+import ProfileImage from '@/components/ProfileImage.vue';
 
 export default {
   name: 'ProductCard',
+  components: { ProfileImage },
   props: {
     product: {
       type: Object,
@@ -17,6 +19,12 @@ export default {
       .refFromURL(storageURL)
       .getDownloadURL();
     this.product.image = imageURL;
+    const author = (await this.$db
+      .collection('user')
+      .doc(this.product.author)
+      .get())
+      .data();
+    this.product.author = author;
   },
   methods: {
     imageStyle(imageURL) {
@@ -78,7 +86,10 @@ export default {
       <span class="card__info__title">{{ product.title }}</span>
       <div class="card__info__meta">
         <div class="card__info__meta__author">
-          <div class="card__info__meta__author__image" />
+          <profile-image
+            class="card__info__meta__author__image"
+            :image="product.author.profileImage"
+          />
           <span class="card__info__meta__author__name">
             {{ product.author.name }}
           </span>
@@ -130,12 +141,13 @@ export default {
       &__author {
         margin-right: auto;
         display: flex;
+        align-items: center;
 
         &__image {
           border: solid 1px rgb(209, 209, 209);
           border-radius: 100%;
-          height: 17px;
-          width: 17px;
+          height: 23px;
+          width: 23px;
           margin-right: 5px;
         }
 
