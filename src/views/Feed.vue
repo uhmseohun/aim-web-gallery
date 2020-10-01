@@ -13,7 +13,7 @@ export default {
       .docs
       .map((doc) => ({
         ...doc.data(),
-        liked: userLikes.includes(doc.id),
+        id: doc.id,
       }));
     this.products = products;
     this.$emit('finishLoad');

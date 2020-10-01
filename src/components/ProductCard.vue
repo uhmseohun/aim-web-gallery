@@ -25,10 +25,6 @@ export default {
           required: true,
         },
       },
-      liked: {
-        type: Boolean,
-        required: true,
-      },
     },
   },
   async created() {
@@ -43,6 +39,12 @@ export default {
       return {
         'background-image': `url('${imageURL}')`,
       };
+    },
+  },
+  computed: {
+    liked() {
+      const { userLikes } = this.$store.state;
+      return userLikes.includes(this.product.id);
     },
   },
   data() {
@@ -74,7 +76,7 @@ export default {
           <span class="card__info__meta__menu__item">
             <img
               class="card__info__meta__menu__item__image"
-              :src="product.liked ? Liked : Like"
+              :src="liked ? Liked : Like"
             />
           </span>
           <span class="card__info__meta__menu__item">

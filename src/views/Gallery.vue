@@ -10,7 +10,10 @@ export default {
       .collection('products')
       .get())
       .docs
-      .map((doc) => doc.data());
+      .map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
     this.products = products;
     this.$emit('finishLoad');
   },
