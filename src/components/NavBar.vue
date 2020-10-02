@@ -118,6 +118,8 @@ export default {
     }
 
     &__profile {
+      height: 40px;
+      width: 40px;
       margin-left: 10px;
       cursor: pointer;
     }
