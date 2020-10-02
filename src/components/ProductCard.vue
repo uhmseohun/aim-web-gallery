@@ -60,6 +60,9 @@ export default {
     pushToProfile(author) {
       this.$router.push(`/profile/${author.userId}`);
     },
+    pushToProduct() {
+      this.$router.push(`/product/${this.product.id}`);
+    },
   },
   computed: {
     liked() {
@@ -81,11 +84,17 @@ export default {
 <template>
   <div class="card">
     <div
+      @click="pushToProduct"
       class="card__image"
       :style="imageStyle(product.thumbnail)"
     />
     <div class="card__info">
-      <span class="card__info__title">{{ product.title }}</span>
+      <span
+        @click="pushToProduct"
+        class="card__info__title"
+      >
+        {{ product.title }}
+      </span>
       <div class="card__info__meta">
         <div class="card__info__meta__author">
           <profile-image
@@ -124,6 +133,7 @@ export default {
   width: 200px;
 
   &__image {
+    cursor: pointer;
     width: 100%;
     height: 200px;
     border: solid 1px rgb(209, 209, 209);
@@ -137,6 +147,7 @@ export default {
 
     &__title {
       font-weight: bold;
+      cursor: pointer;
     }
 
     &__meta {

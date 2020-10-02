@@ -7,6 +7,7 @@ import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
 import EditProfile from '../views/EditProfile.vue';
 import UploadProduct from '../views/UploadProduct.vue';
+import Product from '../views/Product.vue';
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,14 @@ const routes: Array<RouteConfig> = [
     path: '/upload',
     name: 'UploadProduct',
     component: UploadProduct,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/product/:productId',
+    name: 'Product',
+    component: Product,
     meta: {
       requiresAuth: true,
     },
