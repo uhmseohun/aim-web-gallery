@@ -69,6 +69,7 @@ export default {
   transition: 0.5s background-color ease;
   padding: 0.5rem 1rem;
   outline: none;
+  font-size: 1rem;
   cursor: pointer;
 
   &-disabled {

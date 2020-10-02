@@ -20,12 +20,14 @@ export default {
     };
   },
   async created() {
+    this.$emit('startLoad');
     const { image } = this;
     const storageURL = `/profile/${image}`;
     const imageURL = await this.$storage
       .ref(storageURL)
       .getDownloadURL();
     this.imageURL = imageURL;
+    this.$emit('finishLoad');
   },
   watch: {
     image: {

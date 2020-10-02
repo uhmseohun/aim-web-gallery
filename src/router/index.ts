@@ -6,6 +6,7 @@ import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
 import EditProfile from '../views/EditProfile.vue';
+import UploadProduct from '../views/UploadProduct.vue';
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,14 @@ const routes: Array<RouteConfig> = [
     path: '/edit-profile',
     name: 'EditProfile',
     component: EditProfile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/upload',
+    name: 'UploadProduct',
+    component: UploadProduct,
     meta: {
       requiresAuth: true,
     },

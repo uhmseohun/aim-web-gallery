@@ -56,7 +56,12 @@ export default {
     </div>
 
     <div class="navbar__right">
-      <a-button class="navbar__right__button">작품 업로드</a-button>
+      <a-button
+        @click="pushTo('UploadProduct')"
+        class="navbar__right__button"
+      >
+        작품 업로드
+      </a-button>
       <a-button
         v-if="!signedIn"
         @click="pushTo('SignIn')"
@@ -109,7 +114,6 @@ export default {
 
     &__button,
     &__profile {
-      height: 2rem;
       margin-right: 5px;
     }
 

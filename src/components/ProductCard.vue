@@ -15,11 +15,6 @@ export default {
     },
   },
   async created() {
-    const storageURL = this.product.image;
-    const imageURL = await this.$storage
-      .refFromURL(storageURL)
-      .getDownloadURL();
-    this.product.image = imageURL;
     const author = (await this.$db
       .collection('user')
       .doc(this.product.author)
@@ -31,6 +26,7 @@ export default {
     imageStyle(imageURL) {
       return {
         'background-image': `url('${imageURL}')`,
+        'background-position': 'center',
       };
     },
     async toggleProductLike() {
@@ -86,7 +82,7 @@ export default {
   <div class="card">
     <div
       class="card__image"
-      :style="imageStyle(product.image)"
+      :style="imageStyle(product.thumbnail)"
     />
     <div class="card__info">
       <span class="card__info__title">{{ product.title }}</span>
