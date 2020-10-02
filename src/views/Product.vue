@@ -32,11 +32,9 @@ export default {
 
 <template>
   <div class="container">
-    <input
-      class="input-title"
-      v-model="product.title"
-      placeholder="제목을 입력해 주세요"
-    >
+    <h2 class="input-title">
+      {{ product.title }}
+    </h2>
     <div class="content">
       <div
         :key="index"
@@ -86,8 +84,6 @@ export default {
 
 .input {
   &-title {
-    border: 0;
-    outline: none;
     font-size: 1.5rem;
     margin-bottom: 20px;
   }
