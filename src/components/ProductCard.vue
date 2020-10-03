@@ -132,6 +132,10 @@ export default {
 .card {
   width: 200px;
 
+  * {
+    max-width: 100%;
+  }
+
   &__image {
     cursor: pointer;
     width: 100%;
@@ -146,8 +150,13 @@ export default {
     margin-top: 4px;
 
     &__title {
+      width: 100%;
       font-weight: bold;
       cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
     }
 
     &__meta {
