@@ -35,6 +35,13 @@ export default {
     <div class="navbar__center">
       <span
         class="navbar__center__item"
+        @click="pushTo('ProjectList')"
+      >
+        펀딩
+      </span>
+
+      <span
+        class="navbar__center__item"
         @click="pushTo('Feed')"
       >
         피드
@@ -56,6 +63,12 @@ export default {
     </div>
 
     <div class="navbar__right">
+      <a-button
+        @click="pushTo('UploadProject')"
+        class="navbar__right__button"
+      >
+        프로젝트 업로드
+      </a-button>
       <a-button
         @click="pushTo('UploadProduct')"
         class="navbar__right__button"

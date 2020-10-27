@@ -2,12 +2,15 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Feed from '../views/Feed.vue';
 import Gallery from '../views/Gallery.vue';
+import ProjectList from '../views/ProjectList.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
 import EditProfile from '../views/EditProfile.vue';
 import UploadProduct from '../views/UploadProduct.vue';
+import UploadProject from '../views/UploadProject.vue';
 import Product from '../views/Product.vue';
+import Project from '../views/Project.vue';
 
 Vue.use(VueRouter);
 
@@ -24,6 +27,14 @@ const routes: Array<RouteConfig> = [
     path: '/gallery',
     name: 'Gallery',
     component: Gallery,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/project-list',
+    name: 'ProjectList',
+    component: ProjectList,
     meta: {
       requiresAuth: true,
     },
@@ -69,9 +80,25 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/upload-project',
+    name: 'UploadProject',
+    component: UploadProject,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/product/:productId',
     name: 'Product',
     component: Product,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/project/:projectId',
+    name: 'Project',
+    component: Project,
     meta: {
       requiresAuth: true,
     },
