@@ -42,12 +42,14 @@ export default {
 <style lang="scss" scoped>
 .card {
   margin-top: 10px;
-  margin-right: 30px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .card-container {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

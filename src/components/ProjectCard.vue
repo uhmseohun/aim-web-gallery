@@ -147,6 +147,7 @@ export default {
   border-radius: 5px;
   margin-top: 5px;
 }
+
 .progress {
   height: 3px;
   background-color: #344EAE;
