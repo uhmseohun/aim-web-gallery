@@ -128,11 +128,31 @@ export default {
           />
         </div>
       </div>
+
+      <div class="progress-wrapper">
+        <div
+          class="progress"
+          :style="{
+            width: `${((project.paid / project.price) * 100).toFixed(0)}%`
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.progress-wrapper{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.progress {
+  height: 3px;
+  background-color: #344EAE;
+  border-radius: 5px;
+}
+
 .card {
   width: 200px;
 
