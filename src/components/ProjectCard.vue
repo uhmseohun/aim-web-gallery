@@ -155,7 +155,7 @@ export default {
 }
 
 .card {
-  width: 200px;
+  width: 250px;
 
   * {
     max-width: 100%;

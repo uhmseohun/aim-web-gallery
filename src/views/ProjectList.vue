@@ -68,7 +68,7 @@ export default {
   justify-content: center;
 
   &__image {
-    height: 330px;
+    height: 400px;
   }
 }
 
@@ -86,7 +86,7 @@ export default {
 
 .card-container {
   display: flex;
-  width: 1024px;
+  width: 1224px;
   flex-wrap: wrap;
   justify-content: center;
 }

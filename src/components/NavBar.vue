@@ -108,8 +108,10 @@ export default {
   }
 
   &__center {
-    margin-left: auto;
-    margin-right: auto;
+    position: absolute;
+    top: 16px;
+    margin-left: 40vw;
+    margin-right: 40vw;
 
     &__item {
       cursor: pointer;
@@ -124,6 +126,7 @@ export default {
 
   &__right {
     display: flex;
+    margin-left: auto;
 
     &__button,
     &__profile {
