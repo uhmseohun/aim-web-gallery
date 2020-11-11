@@ -48,9 +48,8 @@ export default {
 
 .card-container {
   display: flex;
-  width: 50%;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 40px;
 }
 </style>
