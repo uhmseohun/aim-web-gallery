@@ -5,6 +5,10 @@ import photos from './feed.json';
 export default Vue.extend({
   name: 'App',
   created() {
+    this.photos.forEach((photo) => {
+      const image = new Image();
+      image.src = photo.thumbnail;
+    });
     setInterval(() => {
       this.current += 1;
       if (this.current === this.photos.length) this.current = 0;
