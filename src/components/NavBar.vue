@@ -109,7 +109,7 @@ export default {
 
   &__center {
     position: absolute;
-    top: 16px;
+    top: 41px;
     margin-left: 40vw;
     margin-right: 40vw;
 
