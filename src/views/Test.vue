@@ -30,7 +30,9 @@ export default Vue.extend({
     <img :src="photos[current].thumbnail">
     <div style="width: 300px;">
       <h2>{{ photos[current].title }}</h2>
-      <h3 style="font-weight: normal;">{{ photos[current].content[0].value }}</h3>
+      <h3 style="font-weight: normal; word-wrap: break-all;">
+        {{ photos[current].content[0].value }}
+      </h3>
     </div>
   </div>
 </div>
