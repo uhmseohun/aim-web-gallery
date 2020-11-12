@@ -12,6 +12,7 @@ import UploadProject from '../views/UploadProject.vue';
 import Product from '../views/Product.vue';
 import Project from '../views/Project.vue';
 import Test from '../views/Test.vue';
+import Uhmseohun from '../views/UHMSEOHUN.vue';
 
 Vue.use(VueRouter);
 
@@ -108,6 +109,14 @@ const routes: Array<RouteConfig> = [
     path: '/exhibition',
     name: 'Exhibition',
     component: Test,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/uhmseohun',
+    name: 'UHMSEOHUN',
+    component: Uhmseohun,
     meta: {
       requiresAuth: false,
     },

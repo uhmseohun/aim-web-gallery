@@ -3322,6 +3322,10 @@
     "likers": ["HzMI3ixpdddQSmEpMW24BBkuPZ63"],
     "content": [
       {
+        "value": "사과 같은 내 얼굴 예쁘기도 하지요",
+        "type": "text"
+      },
+      {
         "value": "https://firebasestorage.googleapis.com/v0/b/aim-gallery-2055d.appspot.com/o/products%2F9a1557d6-d723-4136-9596-f41e195fa1e1?alt=media&token=81104972-bfe5-4b47-b5c1-26f8ce3bec1d",
         "type": "photo"
       }
