@@ -18,6 +18,14 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    path: '/',
+    name: 'Funding',
+    component: ProjectList,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/feed',
     name: 'Feed',
     component: Feed,

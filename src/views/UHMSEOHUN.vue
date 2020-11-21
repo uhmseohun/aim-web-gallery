@@ -18,7 +18,6 @@ export default Vue.extend({
       this.current += 1;
       if (this.current === this.photos.length) this.current = 0;
     }, 2500);
-    document.body.style.marginTop = '25px';
   },
   data() {
     return {
